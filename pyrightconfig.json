@@ -1,0 +1,8 @@
+{
+  "venvPath": "/Users/k.trishal/Desktop/EduAgent AI/backend",
+  "venv": "venv",
+  "extraPaths": [
+    "/Users/k.trishal/Desktop/EduAgent AI/backend",
+    "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages"
+  ]
+}

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #2563EB;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-bg-base: #F8F9FB;
+  --color-bg-card: #FFFFFF;
+  --color-border-subtle: #E5E7EB;
+  --color-text-main: #172033;
+  --color-text-muted: #64748B;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  /* Force Light Mode Styling */
+  :root {
+    color-scheme: light;
+  }
+  
+  body {
+    @apply bg-[var(--color-bg-base)] text-[var(--color-text-main)] antialiased font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-[var(--color-bg-card)] border border-[var(--color-border-subtle)] shadow-md;
+  }
+  
+  .glass-card {
+    @apply bg-[var(--color-bg-card)] border border-[var(--color-border-subtle)] rounded-2xl shadow-sm transition-all hover:shadow-md;
+  }
+  
+  .glowing-border {
+    @apply border border-[var(--color-primary)] shadow-[0_0_15px_rgba(37,99,235,0.3)];
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(248, 250, 252, 0.3);
+  }
+  
+  .primary-glow {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  }
+
+  /* Specific components */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* 3D utilities for flashcards */
+  .perspective-\[1000px\] {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}

@@ -1,0 +1,15 @@
+fastapi>=0.109.2
+uvicorn[standard]>=0.27.1
+pydantic>=2.6.1
+pydantic-settings>=2.2.1
+python-dotenv>=1.0.1
+sqlalchemy>=2.0.25
+alembic>=1.13.1
+psycopg2-binary>=2.9.9
+passlib[bcrypt]>=1.7.4
+email-validator>=2.1.0.post1
+PyJWT>=2.8.0
+langchain==0.3.30
+langchain-core==0.3.86
+langchain-openai==0.3.35
+langchain-text-splitters==0.3.11

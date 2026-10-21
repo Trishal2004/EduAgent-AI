@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - mysql
+      - qdrant
+    env_file:
+      - ./backend/.env
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:password123@mysql:3306/eduagent
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password123
+      - MYSQL_DATABASE=eduagent
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+volumes:
+  mysql_data:
+  qdrant_storage:

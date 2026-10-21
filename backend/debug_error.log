@@ -1,0 +1,49 @@
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/document_processing.py", line 99, in process_document
+    embeddings = await self.embedding_service.generate_embeddings(texts_to_embed)
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/embedding.py", line 22, in generate_embeddings
+    response = await self.client.embeddings.create(
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/openai/resources/embeddings.py", line 260, in create
+    return await self._post(
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/openai/_base_client.py", line 1977, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/openai/_base_client.py", line 1762, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-place************************-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/document_processing.py", line 107, in process_document
+    raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Failed to generate embeddings. Is your OpenAI API key valid? Error: {str(e)}")
+fastapi.exceptions.HTTPException: 500: Failed to generate embeddings. Is your OpenAI API key valid? Error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-place************************-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+
+--- ERROR ---
+Traceback (most recent call last):
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/pymupdf/__init__.py", line 2992, in __init__
+    doc = mupdf.fz_open_document(filename)
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/pymupdf/mupdf.py", line 48462, in fz_open_document
+    return _mupdf.fz_open_document(filename)
+pymupdf.mupdf.FzErrorFormat: code=7: no objects found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/document_processing.py", line 51, in process_document
+    chunks = extractor.extract(doc.file_path, doc.id)
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/extraction/pdf_extractor.py", line 10, in extract
+    doc = fitz.open(file_path)
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/venv/lib/python3.9/site-packages/pymupdf/__init__.py", line 2995, in __init__
+    raise FileDataError(f'Failed to open file {filename!r}.') from e
+pymupdf.FileDataError: Failed to open file 'uploads/432abd8808f34c168f5e03918ff34175.pdf'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/k.trishal/Desktop/EduAgent AI/backend/app/services/document_processing.py", line 58, in process_document
+    raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Extraction failed: {str(e)}")
+fastapi.exceptions.HTTPException: 500: Extraction failed: Failed to open file 'uploads/432abd8808f34c168f5e03918ff34175.pdf'.
+
